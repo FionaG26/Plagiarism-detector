@@ -82,13 +82,9 @@ pip3 install nltk scikit-learn
    - If plagiarism is detected, it will display the reference text(s) with similarity scores.
    - If no plagiarism is detected, it will print "No plagiarism detected."
 
-Following these steps will allow you to test the plagiarism detection program using the provided example document and reference texts. Adjust the content of the files as needed for your testing purposes.
+Following these steps will allow you to test the plagiarism detection program using the provided example document and reference texts. Adjust the content of the files as needed for your testing purposes. The script will output detected plagiarized content along with their similarity scores, if any.
+![Review Results]([(https://github.com/FionaG26/Plagiarism-detector/blob/main/plag.JPG)]
 
-```bash
-python main.py
-```
-
-3. The script will output detected plagiarized content along with their similarity scores, if any.
 
 ## Customization
 
