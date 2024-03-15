@@ -20,6 +20,10 @@ def detect_plagiarism(query_text, reference_texts, threshold=0.8):
     # Calculate similarity
     similarity_scores = calculate_similarity(query_features, reference_features)
 
+    print("Query features shape:", query_features.shape)
+    print("Reference features shape:", reference_features.shape)
+    print("Similarity scores:", similarity_scores)
+
     # Identify plagiarized content
     plagiarism_results = []
     for i, score in enumerate(similarity_scores[0]):
