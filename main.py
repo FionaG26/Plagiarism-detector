@@ -13,6 +13,10 @@ def detect_plagiarism(query_text, reference_texts, threshold=0.8):
     query_features, _ = tfidf_features([' '.join(preprocessed_query)])
     reference_features, _ = tfidf_features([' '.join(text) for text in preprocessed_references])
 
+    # Ensure the number of features is consistent
+    if query_features.shape[1] != reference_features.shape[1]:
+        raise ValueError("Incompatible dimensions for query and reference features")
+
     # Calculate similarity
     similarity_scores = calculate_similarity(query_features, reference_features)
 
@@ -42,15 +46,18 @@ if __name__ == "__main__":
         "This is the second reference text. It also contains some unique content for testing plagiarism detection."
     ]
 
-    # Test plagiarism detection
-    results = detect_plagiarism(example_document, reference_texts)
+    try:
+        # Test plagiarism detection
+        results = detect_plagiarism(example_document, reference_texts)
 
-    # Print results
-    if results:
-        print("Plagiarized content detected:")
-        for result in results:
-            print("Reference:", result['reference_text'])
-            print("Similarity Score:", result['similarity_score'])
-            print()
-    else:
-        print("No plagiarism detected.")
+        # Print results
+        if results:
+            print("Plagiarized content detected:")
+            for result in results:
+                print("Reference:", result['reference_text'])
+                print("Similarity Score:", result['similarity_score'])
+                print()
+        else:
+            print("No plagiarism detected.")
+    except ValueError as e:
+        print("Error:", e)
