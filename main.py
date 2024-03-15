@@ -63,3 +63,5 @@ if __name__ == "__main__":
                 print()
         else:
             print("No plagiarism detected.")
+    except ValueError as e:
+        print("Error:", e)
