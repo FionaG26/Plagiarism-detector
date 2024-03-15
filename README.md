@@ -17,12 +17,16 @@ This project implements a plagiarism detector in Python. The detector compares a
 ## Dependencies
 
 - **NLTK**: Natural Language Toolkit for text preprocessing.
+
+```bash
+pip3 install nltk
+```
 - **scikit-learn**: Library for machine learning tasks including feature extraction and similarity calculation.
 
 Install dependencies using pip:
 
 ```bash
-pip install nltk scikit-learn
+pip3 install nltk scikit-learn
 ```
 
 ## Usage
