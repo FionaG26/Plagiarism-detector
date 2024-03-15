@@ -1,20 +1,22 @@
+# main.py
+
 from preprocess import preprocess_text
 from feature_extraction import tfidf_features
 from similarity_calculation import calculate_similarity
 
-def detect_plagiarism(query_text, reference_texts, feature_extraction='tfidf', threshold=0.8):
+
+def detect_plagiarism(query_text, reference_texts, threshold=0.8):
     preprocessed_query = preprocess_text(query_text)
     preprocessed_references = [preprocess_text(text) for text in reference_texts]
 
-    if feature_extraction == 'bow':
-        # Implement if needed
-        pass
-    else:
-        query_features, _ = tfidf_features([query_text])  # Pass query_text as a list
-        reference_features, _ = tfidf_features(reference_texts)  # Pass reference_texts directly
+    # Extract TF-IDF features
+    query_features, _ = tfidf_features([' '.join(preprocessed_query)])
+    reference_features, _ = tfidf_features([' '.join(text) for text in preprocessed_references])
 
+    # Calculate similarity
     similarity_scores = calculate_similarity(query_features, reference_features)
 
+    # Identify plagiarized content
     plagiarism_results = []
     for i, score in enumerate(similarity_scores[0]):
         if score >= threshold:
@@ -25,19 +27,23 @@ def detect_plagiarism(query_text, reference_texts, feature_extraction='tfidf', t
 
     return plagiarism_results
 
+
 if __name__ == "__main__":
-    # Read the content of the example document
-    with open("example_document.txt", "r") as file:
-        query_text = file.read()
+    # Define the example document
+    example_document = """
+    This is an example document for testing plagiarism detection.
+    It contains some text that may or may not be plagiarized from other sources.
+    The goal is to identify any similarities between this document and the reference texts.
+    """
 
     # Define the reference texts
-    reference_texts = []
-    for i in range(1, 3):  # Assuming you have 2 reference texts: reference1.txt, reference2.txt
-        with open(f"reference{i}.txt", "r") as file:
-            reference_texts.append(file.read())
+    reference_texts = [
+        "This is the first reference text. It contains some unique content that may or may not be similar to the example document.",
+        "This is the second reference text. It also contains some unique content for testing plagiarism detection."
+    ]
 
     # Test plagiarism detection
-    results = detect_plagiarism(query_text, reference_texts)
+    results = detect_plagiarism(example_document, reference_texts)
 
     # Print results
     if results:
