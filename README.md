@@ -1,7 +1,3 @@
-Certainly! Below is an enhanced README written in Markdown format for your plagiarism detector project:
-
----
-
 # Plagiarism Detector
 
 ## Overview
