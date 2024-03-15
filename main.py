@@ -1,5 +1,3 @@
-# main.py
-
 from preprocess import preprocess_text
 from feature_extraction import tfidf_features
 from similarity_calculation import calculate_similarity
@@ -10,8 +8,8 @@ def detect_plagiarism(query_text, reference_texts, threshold=0.8):
     preprocessed_references = [preprocess_text(text) for text in reference_texts]
 
     # Extract TF-IDF features
-    query_features, _ = tfidf_features([' '.join(preprocessed_query)])
-    reference_features, _ = tfidf_features([' '.join(text) for text in preprocessed_references])
+    query_features, _ = tfidf_features([preprocessed_query])
+    reference_features, _ = tfidf_features(preprocessed_references)
 
     # Ensure the number of features is consistent
     if query_features.shape[1] != reference_features.shape[1]:
@@ -26,7 +24,7 @@ def detect_plagiarism(query_text, reference_texts, threshold=0.8):
 
     # Identify plagiarized content
     plagiarism_results = []
-    for i, score in enumerate(similarity_scores[0]):
+    for i, score in enumerate(similarity_scores):
         if score >= threshold:
             plagiarism_results.append({
                 'reference_text': reference_texts[i],
