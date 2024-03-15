@@ -22,4 +22,7 @@ def preprocess_text(text):
     # Lemmatization
     tokens = [lemmatizer.lemmatize(word) for word in tokens]
 
-    return tokens
+    # Join the tokens back into a single string
+    processed_text = ' '.join(tokens)
+
+    return processed_text
